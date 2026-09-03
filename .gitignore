@@ -1,0 +1,34 @@
+# Gradle and Android build output
+.gradle/
+.kotlin/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+output-metadata.json
+
+# Local machine configuration
+local.properties
+*.log
+*.hprof
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Signing and provider secrets
+*.jks
+*.keystore
+google-services.json
+secrets.properties
+*.env
+.env.*
+
+# Operating-system files
+.DS_Store
+Thumbs.db

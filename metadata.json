@@ -1,0 +1,8 @@
+{
+  "name": "THyNK-IN!",
+  "description": "Creator assistant and studio app with AI companion, design editor, and audio workspace.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

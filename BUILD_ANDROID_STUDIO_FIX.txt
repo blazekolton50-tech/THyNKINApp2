@@ -1,0 +1,1 @@
+THyNK-IN Android Studio fix: Gradle daemon pinned to Java 21 via gradle/gradle-daemon-jvm.properties. No app code or branding changed.

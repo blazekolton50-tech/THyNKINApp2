@@ -1,0 +1,57 @@
+name: THyNK-IN! AI Assistant CI
+
+on:
+  push:
+    branches:
+      - chatgpt/thynk-in-visible-patsy-integration-2026-09-02
+  pull_request:
+    paths:
+      - 'app/src/main/java/com/patsy/app/patsy/**'
+      - 'app/src/test/java/com/patsy/app/patsy/**'
+      - 'app/build.gradle.kts'
+      - '.github/workflows/patsy-native-ci.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  ai-assistant-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Verify canonical AI assistant contract
+        run: ./gradlew testDebugUnitTest --tests 'com.patsy.app.patsy.*' --stacktrace
+
+      - name: Build native Android debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Publish THyNK-IN! debug APK
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          TAG="thynk-in-ai-${SHORT_SHA}"
+          ASSET="THyNK-IN!.apk"
+          cp app/build/outputs/apk/debug/app-debug.apk "$ASSET"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET" --clobber
+          else
+            gh release create "$TAG" "$ASSET" \
+              --target "$GITHUB_SHA" \
+              --title "THyNK-IN! AI Assistant Debug" \
+              --notes "THyNK-IN! debug build with native AI assistant verification: canonical 720x720 contract; Big 300/1.0; Mini 150/0.5; 0.8 s shrink; 0.4 s mission run; native target pointing and rainbow fallback. The final authored production .riv is still supplied separately when available." \
+              --prerelease
+          fi
+
+# Re-triggered after runner startup failure; no production behavior changed.

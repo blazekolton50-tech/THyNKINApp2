@@ -1,0 +1,34 @@
+{
+  "version": "2026-08-29",
+  "repo": "blazekolton50-tech/PatsyApp",
+  "visual_rules": {
+    "background": "black/charcoal",
+    "primary_text": "white/light grey",
+    "primary_buttons": "white",
+    "accent": "restrained rainbow/neon outlines/glows/active states",
+    "logo_position": "centered at top on principal pages",
+    "tagline": "A LEGACY LED BY PAWS",
+    "main_patsy": "realistic, transparent/unboxed, moving companion",
+    "pawmojis": "cartoon assets only"
+  },
+  "media": {
+    "unlocked_retention_days": 90,
+    "locked_profile_photo_limit": 100,
+    "locked_profile_video_limit": 30,
+    "export_options": [
+      "Save to Device",
+      "Email Me a Copy",
+      "Lock in Patsy",
+      "Share",
+      "Import / Reload"
+    ]
+  },
+  "signup_copy": "I'm Patsy. Your personal AI PetPal. Log in and I'll show you what I can do!",
+  "main_nav": [
+    "Home",
+    "Design Studio",
+    "Create",
+    "Patsy DMs",
+    "Profile"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "referenceMappingVersion": "V1-CANONICAL-LOCKED-2026-09-01",
+  "approvedVideoCount": 13,
+  "rule": "ONLY these 13 MP4 files are approved motion-reference videos. No other video may define Patsy production motion.",
+  "mappings": [
+    {"video": "fluffy_dog_leap (1).mp4", "mappedBehavior": "Jump/leap anticipation, lift, apex, landing compression and settle"},
+    {"video": "pleading_puppy_closeup.mp4", "mappedBehavior": "Approach walk cadence, forward engagement, pleading/attention body language and macro sniff"},
+    {"video": "sassy_dog_exit.mp4", "mappedBehavior": "Turn-away, tail response, exit/reposition cadence and head-shake impulse reference"},
+    {"video": "laughing_maltipoo_studio.mp4", "mappedBehavior": "Relaxed lying/sphinx pant, joyful squint/laugh expression and head-roll settle"},
+    {"video": "talking_maltipoo_studio (1).mp4", "mappedBehavior": "Greeting, speaking/pant mouth activity, head tilt and micro-nod"},
+    {"video": "shaggy_dog_blinking.mp4", "mappedBehavior": "Resting settle, natural blink variation and calm breathing reference"},
+    {"video": "fluffy_dog_waving.mp4", "mappedBehavior": "One-paw wave lift, waving arc, weight shift and return settle"},
+    {"video": "shaggy_dog_portrait_1.mp4", "mappedBehavior": "Head tilt transitions, asymmetric ear reaction and vocalizing head bow"},
+    {"video": "happy_dog_smile (1).mp4", "mappedBehavior": "Happy open-mouth idle and positive facial baseline"},
+    {"video": "shy_dog_peekaboo.mp4", "mappedBehavior": "Paw-to-face reach/cover/reveal motion reference; compose only from legal V1 controls unless ABI deliberately expands later"},
+    {"video": "dog_pointing_studio.mp4", "mappedBehavior": "Gaze-first paw pointing, target reach, hold and return settle"},
+    {"video": "magical_dog_shrink.mp4", "mappedBehavior": "Shrink/expand timing reference; real host scale remains Compose-owned and stage/scale mirrors it"},
+    {"video": "shaggy_dog_portrait.mp4", "mappedBehavior": "Off-axis look, profile swivel, yawn/deep-exhale and sleepy eye closure"}
+  ],
+  "forbiddenExamples": [
+    "fluffy_dog_spinning.mp4",
+    "curious_dog_head_tilt_1.mp4"
+  ]
+}

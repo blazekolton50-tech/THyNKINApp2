@@ -1,0 +1,312 @@
+{
+  "version": "2026-09-01",
+  "branch": "chatgpt/codex-ready-2026-09-01",
+  "statusModel": "THYNK_FULL_STUDIO_RECONCILIATION_V1",
+  "statuses": [
+    "ALREADY_NATIVE",
+    "PORT_FROM_UPLOAD",
+    "REPLACE_PLACEHOLDER",
+    "GENUINELY_MISSING"
+  ],
+  "donorSources": [
+    "Thynk-Full-Ecosystem-Studio(1).html",
+    "Thynk-Full-Studio-Working(1).html",
+    "Thynk-Studio-Pro-Complete builds",
+    "FULL-INVENTORY.pdf",
+    "THyNK-MUSIC-EVERYTHING.pdf",
+    "THYNK-Music-Lab.tsx",
+    "Templates.tsx",
+    "Gemini/React TypeScript publication and video editor source",
+    "1110-item setup/material descriptions"
+  ],
+  "capabilities": [
+    {
+      "id": "shared.authenticated-shell",
+      "area": "Shared Studio",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/FinalMainActivity.kt", "app/src/main/java/com/patsy/app/navigation/ShellNavigationContract.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Keep the one authenticated native shell; donor mode-switch navigation is not app navigation.",
+      "nextSlice": "preserve"
+    },
+    {
+      "id": "shared.primary-navigation",
+      "area": "Shared Studio",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/ui/finaldesign/FinalPrimaryNavigationBar.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf"],
+      "truthBoundary": "Preserve HOME · THyNK · CAMERA · PATSY DMS · PROFILE and the locked visible bar.",
+      "nextSlice": "preserve"
+    },
+    {
+      "id": "shared.editor-state",
+      "area": "Shared Studio",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioEditorState.kt", "app/src/main/java/com/patsy/app/studio/StudioToolCatalog.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf", "Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Extend these contracts instead of creating a parallel React/localStorage editor state.",
+      "nextSlice": "design-canvas"
+    },
+    {
+      "id": "shared.project-title-workspace",
+      "area": "Shared Studio",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioEditorState.kt", "app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Port useful project/workspace affordances into Compose without donor top-level navigation.",
+      "nextSlice": "design-canvas"
+    },
+    {
+      "id": "shared.browser-localstorage",
+      "area": "Shared Studio",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/services/studio/CreationStudioService.kt"],
+      "donorEvidence": ["README.pdf", "Thynk-Full-Studio-Working(1).html"],
+      "truthBoundary": "Replace browser localStorage autosave/version history with native account-scoped persistence/Supabase contracts.",
+      "nextSlice": "project-persistence"
+    },
+    {
+      "id": "design.canvas-transforms",
+      "area": "Design & Templates",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioEditorState.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf", "Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Port x/y/w/h/rotation/opacity, drag, resize and rotate behavior into deterministic native state.",
+      "nextSlice": "design-canvas"
+    },
+    {
+      "id": "design.layers",
+      "area": "Design & Templates",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioEditorState.kt", "app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf", "Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Port hide, lock and reorder using native state and tests.",
+      "nextSlice": "design-canvas"
+    },
+    {
+      "id": "design.rulers-guides-align",
+      "area": "Design & Templates",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioToolCatalog.kt", "app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Port Rulers & Guides and Align & Distribute as native editor tools.",
+      "nextSlice": "design-canvas"
+    },
+    {
+      "id": "design.tools-text-elements-stickers-frames",
+      "area": "Design & Templates",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioToolCatalog.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Port the tool coverage without importing the React runtime.",
+      "nextSlice": "design-tools"
+    },
+    {
+      "id": "design.template-catalogue",
+      "area": "Design & Templates",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/thynk/ThynkStudioCatalog.kt"],
+      "donorEvidence": ["Templates.tsx", "FULL-INVENTORY.pdf"],
+      "truthBoundary": "Port catalogue behavior; only verified real template assets may be surfaced in production.",
+      "nextSlice": "design-templates"
+    },
+    {
+      "id": "assets.manifest-only-records",
+      "area": "Donor Assets",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["future: com.patsy.app.studio.assets donor verifier"],
+      "donorEvidence": ["FULL-INVENTORY.pdf", "1110-item setup/material descriptions"],
+      "truthBoundary": "Manifest names are not production bytes. Verify existence, origin/license, checksum and supersession before promotion.",
+      "nextSlice": "asset-verification"
+    },
+    {
+      "id": "photo.import",
+      "area": "Photo & Image",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/thynk/NativeCameraHub.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds"],
+      "truthBoundary": "Use native Android import rather than browser file handling.",
+      "nextSlice": "preserve"
+    },
+    {
+      "id": "photo.crop-adjust-filter",
+      "area": "Photo & Image",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioEditorState.kt"],
+      "donorEvidence": ["Gemini/React TypeScript publication and video editor source", "1110-item setup/material descriptions"],
+      "truthBoundary": "Port only effects that can produce truthful native editable/export results.",
+      "nextSlice": "photo-image"
+    },
+    {
+      "id": "photo.css-only-filters",
+      "area": "Photo & Image",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["future native image-render/export path"],
+      "donorEvidence": ["1110-item setup/material descriptions"],
+      "truthBoundary": "A CSS/browser preview is not a production image edit unless the native export contains the effect.",
+      "nextSlice": "photo-image"
+    },
+    {
+      "id": "video.camera-capture-import",
+      "area": "Video & Camera",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/thynk/NativeCameraHub.kt", "app/src/main/java/com/patsy/app/thynk/CameraHubContract.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf"],
+      "truthBoundary": "Do not rebuild native Camera/FileProvider capture and import.",
+      "nextSlice": "preserve"
+    },
+    {
+      "id": "video.media3-player",
+      "area": "Video & Camera",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/studio/StudioVideoPlayer.kt", "app/src/main/java/com/patsy/app/studio/StudioVideoPlayerLogic.kt"],
+      "donorEvidence": ["Gemini/React TypeScript publication and video editor source"],
+      "truthBoundary": "Extend the Media3 foundation; do not introduce a browser video runtime.",
+      "nextSlice": "video-timeline"
+    },
+    {
+      "id": "video.timeline-effects-transitions-overlays",
+      "area": "Video & Camera",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["future native timeline/effects models adjacent to app/src/main/java/com/patsy/app/studio/StudioVideoPlayer.kt"],
+      "donorEvidence": ["Gemini/React TypeScript publication and video editor source", "1110-item setup/material descriptions"],
+      "truthBoundary": "Port timeline/effect models and controls onto Media3/native processing in independently testable slices.",
+      "nextSlice": "video-timeline"
+    },
+    {
+      "id": "video.browser-capturestream-export",
+      "area": "Video & Camera",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["future native Android video export pipeline"],
+      "donorEvidence": ["1110-item setup/material descriptions"],
+      "truthBoundary": "Browser captureStream/MediaRecorder timed demo export is not Android production export.",
+      "nextSlice": "video-export"
+    },
+    {
+      "id": "publication.page-model-spreads",
+      "area": "Documents / Publication",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["future focused publication page-model package under com.patsy.app.studio"],
+      "donorEvidence": ["Gemini/React TypeScript publication and video editor source", "README.pdf"],
+      "truthBoundary": "Port add/duplicate/delete/reorder, spread view, text/image-frame and print-layout concepts incrementally.",
+      "nextSlice": "publication-page-model"
+    },
+    {
+      "id": "publication.alert-only-actions",
+      "area": "Documents / Publication",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["future publication page commands"],
+      "donorEvidence": ["Gemini/React TypeScript publication and video editor source"],
+      "truthBoundary": "Replace alert-only buttons and visual-only page cards with real native state transitions.",
+      "nextSlice": "publication-page-model"
+    },
+    {
+      "id": "publication.real-pdf-export",
+      "area": "Documents / Publication",
+      "status": "GENUINELY_MISSING",
+      "nativeTargets": ["future verified Android document export pipeline"],
+      "donorEvidence": ["README.pdf", "Gemini/React TypeScript publication and video editor source"],
+      "truthBoundary": "Do not claim PDF/export completion until Android writes verified bytes from the editable page model.",
+      "nextSlice": "publication-export"
+    },
+    {
+      "id": "presentations.templates-page-workflow",
+      "area": "Presentations",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["future presentation adapter on shared page/canvas model"],
+      "donorEvidence": ["FULL-INVENTORY.pdf", "README.pdf"],
+      "truthBoundary": "Reuse shared native page/canvas contracts rather than a separate web presentation runtime.",
+      "nextSlice": "presentations"
+    },
+    {
+      "id": "music.ten-stable-routes",
+      "area": "THyNK Music",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/thynk/ThynkStudioCatalog.kt", "app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt"],
+      "donorEvidence": ["THyNK-MUSIC-EVERYTHING.pdf", "THYNK-Music-Lab.tsx"],
+      "truthBoundary": "Keep music-home, create-music, ai-music-generator, track-editor, mixer, equalizer, effects, lyrics-vocals, mastering and export stable.",
+      "nextSlice": "music-tools"
+    },
+    {
+      "id": "music.player-eq-drum-piano-sampler-layers-effects",
+      "area": "THyNK Music",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt", "future focused native music state/components"],
+      "donorEvidence": ["THyNK-MUSIC-EVERYTHING.pdf", "THYNK-Music-Lab.tsx"],
+      "truthBoundary": "Port player controls, visualizer concepts, 10-band EQ, sequencer, piano roll, sampler, tracks and effects into focused native components.",
+      "nextSlice": "music-tools"
+    },
+    {
+      "id": "music.random-waveforms-webaudio-standins",
+      "area": "THyNK Music",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["future real imported-audio analysis/DSP path"],
+      "donorEvidence": ["THyNK-MUSIC-EVERYTHING.pdf", "THYNK-Music-Lab.tsx"],
+      "truthBoundary": "Never fabricate waveform/audio data. WebAudio oscillator/demo behavior is donor reference, not production output.",
+      "nextSlice": "music-audio-engine"
+    },
+    {
+      "id": "music.provider-generation-mastering-vocals",
+      "area": "THyNK Music",
+      "status": "GENUINELY_MISSING",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/services/ai/PatsyIntelligenceService.kt", "future configured provider services"],
+      "donorEvidence": ["THyNK-MUSIC-EVERYTHING.pdf"],
+      "truthBoundary": "Remain NOT_CONFIGURED until genuine providers/services are configured and verified.",
+      "nextSlice": "provider-integration"
+    },
+    {
+      "id": "music.real-master-stems-export",
+      "area": "THyNK Music",
+      "status": "GENUINELY_MISSING",
+      "nativeTargets": ["future native audio encoding/export pipeline"],
+      "donorEvidence": ["THyNK-MUSIC-EVERYTHING.pdf"],
+      "truthBoundary": "Selecting WAV/MP3/OGG/FLAC/STEMS is not export success; require real encoded bytes and a real URI/path.",
+      "nextSlice": "music-export"
+    },
+    {
+      "id": "library.project-list-autosave-version-history-ux",
+      "area": "Library / Persistence",
+      "status": "PORT_FROM_UPLOAD",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/services/studio/CreationStudioCoordinator.kt", "app/src/main/java/com/patsy/app/services/studio/CreationStudioService.kt"],
+      "donorEvidence": ["README.pdf", "Thynk-Full-Studio-Working(1).html"],
+      "truthBoundary": "Port workflow semantics to account-scoped native/Supabase persistence.",
+      "nextSlice": "project-persistence"
+    },
+    {
+      "id": "library.express-prisma-backend",
+      "area": "Library / Persistence",
+      "status": "REPLACE_PLACEHOLDER",
+      "nativeTargets": ["existing Supabase backend/security/storage contracts"],
+      "donorEvidence": ["README.pdf", "FULL-INVENTORY.pdf"],
+      "truthBoundary": "Do not introduce a second Express/Prisma or Spring backend. Supabase remains authoritative.",
+      "nextSlice": "project-persistence"
+    },
+    {
+      "id": "ai.image-video-music-provider-output",
+      "area": "AI / Providers",
+      "status": "GENUINELY_MISSING",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/services/ai/PatsyIntelligenceCoordinator.kt", "app/src/main/java/com/patsy/app/services/FeatureServiceBindings.kt"],
+      "donorEvidence": ["Thynk-Studio-Pro-Complete builds", "THyNK-MUSIC-EVERYTHING.pdf"],
+      "truthBoundary": "Keep provider-backed output explicitly NOT_CONFIGURED where no real configured provider exists.",
+      "nextSlice": "provider-integration"
+    },
+    {
+      "id": "rive.host-runtime-contracts",
+      "area": "Patsy / Rive",
+      "status": "ALREADY_NATIVE",
+      "nativeTargets": ["app/src/main/java/com/patsy/app/patsy/rig/rive/PatsyRiveHost.kt", "app/src/main/java/com/patsy/app/patsy/rig/rive/PatsyRiveRuntimeAdapter.kt"],
+      "donorEvidence": ["FULL-INVENTORY.pdf"],
+      "truthBoundary": "Preserve host/runtime contracts; donor asset names do not prove binary availability.",
+      "nextSlice": "preserve"
+    },
+    {
+      "id": "rive.final-production-patsy",
+      "area": "Patsy / Rive",
+      "status": "GENUINELY_MISSING",
+      "nativeTargets": ["future verified authored production .riv asset"],
+      "donorEvidence": ["FULL-INVENTORY.pdf"],
+      "truthBoundary": "No GIF, sprite, PNG pose-swap or bob animation may be called production Patsy. Require real authored .riv and device validation.",
+      "nextSlice": "production-rive"
+    }
+  ]
+}

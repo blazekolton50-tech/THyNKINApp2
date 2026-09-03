@@ -1,0 +1,39 @@
+{
+  "version": "3.3.4",
+  "product": "PATSY",
+  "tagline": "YOUR AI. YOUR WORKSPACE. YOUR CONTROL.",
+  "visual": {
+    "background": "#000000",
+    "charcoal": "#202124",
+    "rainbow": ["#FF6B35", "#FFD447", "#4CD964", "#36A9FF", "#9B59FF", "#FF4FA3"],
+    "white": "#F7F7F7",
+    "supporting_patsy_accent": "#FF4FA3"
+  },
+  "patsy": {
+    "identity": "real supplied Patsy reference",
+    "coat": "small fluffy grey/white shaggy-curly coat",
+    "ears": "darker grey/black and straighter than body fur",
+    "eyes": "dark",
+    "nose": "black",
+    "personality": ["warm", "practical", "friendly", "slightly cheeky", "honest", "encouraging"],
+    "role": "personal AI co-pilot",
+    "never": ["take control", "silently change approved decisions", "pretend an action happened", "replace Patsy with a generic dog"]
+  },
+  "roles": {
+    "USER": ["home", "chat", "create", "schedule", "more", "dms"],
+    "OWNER": ["all user features", "administration", "configuration", "diagnostics", "AI/provider config", "moderation/safety", "app management", "audit/security"]
+  },
+  "owner_security": {
+    "source_of_truth": "trusted authentication/authorisation backend",
+    "ui_hiding_is_not_security": true,
+    "no_hardcoded_owner_secret": true,
+    "prevent_privilege_escalation": true,
+    "audit_sensitive_actions": true
+  },
+  "memory": {
+    "layers": ["LOCKED_MEMORY", "WORKING_MEMORY"],
+    "approved_changes_require_explicit_owner_instruction": true,
+    "newer_explicit_instruction_overrides_older": true
+  },
+  "features": ["AI", "web search", "DMs", "Creation Studio", "10-second video", "scheduling", "repurposing", "hashtags", "growth", "tools", "age modes", "privacy"]
+}

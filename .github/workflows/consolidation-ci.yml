@@ -1,0 +1,151 @@
+name: Patsy Consolidation CI
+
+on:
+  push:
+    branches:
+      - codex/consolidate-final3-auth-rive-2026-08-31
+      - chatgpt/thynk-music-apk-2026-08-31
+      - chatgpt/codex-ready-2026-09-01
+      - chatgpt/device-launcher-thynk-panel-2026-09-02
+      - chatgpt/thynk-in-visible-patsy-integration-2026-09-02
+  pull_request:
+    branches:
+      - feat/final-login-password-home-design-lock
+      - chatgpt/camera-native-foundation-2026-08-31
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: Apply locked THyNK integration
+        run: python3 scripts/apply_thynk_music_integration.py
+      - name: Apply native Camera integration
+        run: python3 scripts/apply_camera_native_integration.py
+      - name: Apply native THyNK Design editor host
+        run: python3 scripts/apply_thynk_design_editor_integration_compat.py
+      - name: Apply complete THyNK page routing
+        run: python3 scripts/apply_thynk_page_completeness.py
+      - name: Apply native THyNK Fashion workspace
+        run: python3 scripts/apply_thynk_fashion_workspace.py
+      - name: Apply native THyNK recording workspace
+        run: python3 scripts/apply_thynk_recording_workspace.py
+      - name: Apply real THyNK audio import
+        run: python3 scripts/apply_thynk_audio_import.py
+      - name: Apply locked nine THyNK Music workspaces
+        run: python3 scripts/apply_thynk_music_nine_workspaces.py
+      - name: Apply live authenticated Profile route
+        run: python3 scripts/apply_live_profile_route.py
+      - name: Apply truthful PDM presentation
+        run: python3 scripts/apply_truthful_dm_ui.py
+      - name: Apply live authenticated PDM route
+        run: python3 scripts/apply_live_dm_route.py
+      - name: Apply Patsy full-screen companion overlay
+        run: python3 scripts/apply_patsy_companion_overlay.py
+      - name: Persist integration on source branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/chatgpt/thynk-music-apk-2026-08-31'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/java/com/patsy/app/FinalMainActivity.kt app/src/main/java/com/patsy/app/ui/finaldesign/FinalVisualContract.kt app/src/main/java/com/patsy/app/ui/finaldesign/FinalPrimaryNavigationBar.kt app/src/main/java/com/patsy/app/ui/finaldesign/FinalHomeScreen.kt app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: persist locked THyNK integration"
+            git push origin HEAD:chatgpt/thynk-music-apk-2026-08-31
+          fi
+      - name: Unit tests
+        run: ./gradlew testDebugUnitTest --stacktrace
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace
+      - name: Build release variant
+        run: ./gradlew assembleRelease --stacktrace
+      - name: Persist verified native integrations
+        if: >-
+          github.event_name == 'push' &&
+          (github.ref == 'refs/heads/chatgpt/codex-ready-2026-09-01' ||
+           github.ref == 'refs/heads/chatgpt/device-launcher-thynk-panel-2026-09-02')
+        run: |
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt app/src/main/java/com/patsy/app/thynk/ThynkDesignEditorScreen.kt app/src/main/java/com/patsy/app/FinalMainActivity.kt app/src/main/java/com/patsy/app/ui/finaldesign/FinalProfileDmScreens.kt
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: persist verified native integrations"
+            git reset --hard HEAD
+            git fetch origin "$BRANCH"
+            git rebase "origin/$BRANCH"
+            git push origin "HEAD:$BRANCH"
+          fi
+      - name: Persist newest THyNK screens and Patsy shell
+        if: github.event_name == 'push' && github.ref == 'refs/heads/chatgpt/thynk-in-visible-patsy-integration-2026-09-02'
+        run: |
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/AndroidManifest.xml app/build.gradle.kts app/src/main/java/com/patsy/app/FinalMainActivity.kt app/src/main/java/com/patsy/app/ui/finaldesign/FinalHomeScreen.kt app/src/main/java/com/patsy/app/thynk/ThynkStudioScreen.kt
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: persist visible THyNK-IN device shell"
+            git fetch origin "$BRANCH"
+            git rebase "origin/$BRANCH"
+            git push origin "HEAD:$BRANCH"
+          fi
+      - name: Upload debug APK
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: thynk-in-current-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Publish direct APK preview
+        if: >-
+          github.event_name == 'push' &&
+          (github.ref == 'refs/heads/chatgpt/thynk-music-apk-2026-08-31' ||
+           github.ref == 'refs/heads/chatgpt/device-launcher-thynk-panel-2026-09-02' ||
+           github.ref == 'refs/heads/chatgpt/thynk-in-visible-patsy-integration-2026-09-02')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CURRENT_SHA="$(git rev-parse HEAD)"
+          if [ "$GITHUB_REF" = "refs/heads/chatgpt/thynk-in-visible-patsy-integration-2026-09-02" ]; then
+            TAG="thynk-in-new-screens-patsy-${CURRENT_SHA::7}"
+            ASSET="THyNK-IN-new-screens-Patsy-debug.apk"
+            TITLE="THyNK-IN! New Screens + Patsy Debug"
+            NOTES="Newest native THyNK-IN! build with a visibly updated THyNK-IN home launcher for direct THyNK Music and THyNK-IT access, plus the nine owner-locked THyNK Music workspaces: Mixer/Master Console, Effects Rack, Equaliser, Vocal Studio, DJ Studio, Beats Sampler, Piano Roll/MIDI, AI Tools Suite and Mastering & Export. Shared Arrangement/Timeline remains one project layer. Camera, protected shell and native Patsy companion boundaries are preserved."
+          elif [ "$GITHUB_REF" = "refs/heads/chatgpt/device-launcher-thynk-panel-2026-09-02" ]; then
+            TAG="thynk-in-debug-${CURRENT_SHA::7}"
+            ASSET="THyNK-IN-debug.apk"
+            TITLE="THyNK-IN! Debug Preview"
+            NOTES="Debug preview for physical-device QA of current THyNK-IN! branding, five-destination THyNK Panel, matching destination logos and routed THyNK Music/THyNK-IT pages."
+          else
+            TAG="thynk-music-debug-${CURRENT_SHA::7}"
+            ASSET="PatsyApp-THyNK-Music-debug.apk"
+            TITLE="THyNK Music Debug Preview"
+            NOTES="Debug preview only. THyNK Studio and THyNK Music integration for device testing."
+          fi
+          cp app/build/outputs/apk/debug/app-debug.apk "$ASSET"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET" --clobber
+          else
+            gh release create "$TAG" "$ASSET" \
+              --target "$CURRENT_SHA" \
+              --title "$TITLE" \
+              --notes "$NOTES" \
+              --prerelease
+          fi
+      - name: Create Android Studio project ZIP
+        run: zip -rq PatsyApp-AndroidStudio-THyNK-Music.zip . -x '.git/*' '.gradle/*' 'app/build/*' 'PatsyApp-AndroidStudio-THyNK-Music.zip'
+      - name: Upload Android Studio project ZIP
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: THyNK-IN-AndroidStudio-current
+          path: PatsyApp-AndroidStudio-THyNK-Music.zip
+          compression-level: 0
